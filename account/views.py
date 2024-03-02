@@ -13,3 +13,8 @@ def login_user(request):
             return redirect('/')
         
     return render(request, 'account/login.html')
+
+
+def logout_user(request):
+    logout(request)
+    return redirect('/')
