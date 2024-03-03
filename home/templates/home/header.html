@@ -44,18 +44,20 @@
           <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ml-auto">
               <li class="nav-item active">
-                <a class="nav-link" href="{% url "home:home" %}">Home
-                  <span class="sr-only">(current)</span>
-                </a>
+                <li class="nav-item {% if request.resolver_match.url_name == 'home' %} active {% endif %}">
+                  <a class="nav-link" href="{% url "home:home" %}">Home<span class="sr-only">(current)</span></a>
+                </li>
               </li> 
               <li class="nav-item">
                 <a class="nav-link" href="about.html">About Us</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="{% url "blog:post_list" %}">All Posts</a>
+                <a class="nav-link {% if request.resolver_match.url_name == "post_list" %} active {% endif %}"
+                 href="{% url "blog:post_list" %}">All Posts</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="">Post Details</a>
+                <a class="nav-link {% if request.resolver_match.url_name == "detail" %} active {% endif %}" 
+                href="">Post Details</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="contact.html">Contact Us</a>
