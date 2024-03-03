@@ -29,3 +29,17 @@ def search(request):
     paginator = Paginator(posts, 1)
     objects_list = paginator.get_page(page_number)
     return render(request, 'blog/post_list.html', context={'posts':objects_list})
+
+
+def contact_us(request):
+    if request.method == 'POST':
+        name = request.POST.get('name')
+        text = request.POST.get('text')
+        email = request.POST.get('email')
+        created_at = request.POST.get('created_at')
+        Message.objects.create(name=name, text=text, email=email)
+    return render(request, 'blog/contact_us.html')
+
+
+def about_us(request):
+    return render(request, 'blog/about_us.html')

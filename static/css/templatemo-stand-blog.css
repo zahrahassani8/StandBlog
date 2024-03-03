@@ -1091,3 +1091,7 @@ footer p a:hover {
 		margin-top: 60px;
 	}
 }
+
+    .replied {
+        margin-bottom: 20px; /* Add margin at the bottom of the replied comments section */
+    }
