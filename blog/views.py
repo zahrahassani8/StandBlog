@@ -21,3 +21,11 @@ def post_list(request):
     page_number = request.GET.get('page')
     objects_list = paginator.get_page(page_number)
     return render(request, 'blog/post_list.html', context={'posts':objects_list, 'categories':categories})
+
+def search(request):
+    q = request.GET.get('q')
+    posts = Post.objects.filter(title__icontains=q)
+    page_number = request.GET.get('page')
+    paginator = Paginator(posts, 1)
+    objects_list = paginator.get_page(page_number)
+    return render(request, 'blog/post_list.html', context={'posts':objects_list})
