@@ -1,4 +1,6 @@
 from django.db import models
+from django.utils.text import slugify
+from django.urls import reverse
 from django.contrib.auth.models import User
 
 
@@ -18,10 +20,17 @@ class Article(models.Model):
     slug = models.SlugField(null=True, blank=True, unique=True)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
-    def __str__(self):
-        return self.title
     class Meta:
         ordering = ('-created',)
+    
+    def __str__(self):
+        return self.title
+    
+    def save(self):
+        self.slug = slugify(self.title)
+        super(Article, self).save()
+    
+
 
 
 class Post(models.Model):
@@ -39,3 +48,18 @@ class Post(models.Model):
     
     def __str__(self):
         return self.title
+    
+    def save(self):
+        self.slug = slugify(self.title)
+        super(Post, self).save()
+
+
+
+class Tip(models.Model):
+    text = models.CharField(max_length=200)
+    created = models.DateTimeField(auto_now_add=True)
+    class Meta:
+        ordering = ('created',)
+    
+    def __str__(self):
+        return self.text
