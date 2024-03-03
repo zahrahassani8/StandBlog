@@ -4,6 +4,10 @@ from .models import *
 
 def article_detail(request, id):
     article = get_object_or_404(Article, id=id)
+    if request.method == "POST":
+        parent_id = request.POST.get('parent_id')
+        body = request.POST.get('body')
+        Comment.objects.create(body=body, article=article, user=request.user, parent_id=parent_id)
     tips = Tip.objects.all()[:3]
     categories = Category.objects.all()
     
