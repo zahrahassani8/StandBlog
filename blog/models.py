@@ -29,7 +29,9 @@ class Article(models.Model):
     def save(self):
         self.slug = slugify(self.title)
         super(Article, self).save()
-    
+
+    def get_absolute_url(self):
+        return reverse('blog:detail', args=[self.id])
 
 
 
@@ -53,6 +55,8 @@ class Post(models.Model):
         self.slug = slugify(self.title)
         super(Post, self).save()
 
+    def get_absolute_url(self):
+        return reverse('home:home', args=[self.slug])
 
 
 class Tip(models.Model):
